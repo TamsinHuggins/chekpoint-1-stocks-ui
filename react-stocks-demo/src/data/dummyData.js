@@ -51,14 +51,14 @@ export const getDummyOrders = () => {
   return dummyOrders;
 };
 
-// buyDummyStock function:
+// submitOrder function:
 // resembles the functionality of writing a new order to /stocks via a POST request
 // REQUEST URL: */stocks
 // REQUEST TYPE: POST
 // PARAMETERS: ticker, quantity, price, buyOrSell
 // RETURNS: order object with the keys  ticker, quantity, price, buyOrSell
 
-export const buyDummyStock = (ticker, quantity, price, buyOrSell) => {
+export const submitOrder = (ticker, quantity, price, buyOrSell) => {
   //find the current price of the chosen stock
 
   const newDummyOrder = {
