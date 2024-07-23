@@ -1,5 +1,3 @@
-const date1 = new Date(2024, 1, 2, 10, 40);
-
 // dummyOrders array:
 // Resembles what the backend will return as data, when we make a GET request to /stocks
 // Starts with 3 pre-loaded previous orders
@@ -33,6 +31,14 @@ const dummyOrders = [
   },
 ];
 
+// getDummyTickers function:
+// resembles functionality of a call to price API
+// RETURNS: array of tickers
+
+export const getDummyTickers = () => {
+  return ["AMZN", "TSLA", "APL"];
+};
+
 // getDummyOrders function:
 // resembles the functionality of a GET request to /stocks
 // returns the dummyOrders array
@@ -45,43 +51,24 @@ export const getDummyOrders = () => {
   return dummyOrders;
 };
 
-// getDummyStocks Function
-// resembles functionality of a call to a 3rd party stock price API
-// RETURNS: an array of objects with the current price of the stocks
-
-export const getDummyStocks = () => {
-  const dummyStocks = [
-    { ticker: "AMZN", price: 200.0 },
-    { ticker: "TSLA", price: 250.0 },
-    { ticker: "AAPL", price: 100.0 },
-  ];
-
-  return dummyStocks;
-};
-
 // buyDummyStock function:
 // resembles the functionality of writing a new order to /stocks via a POST request
-// REQUEST URL: /stocks
+// REQUEST URL: */stocks
 // REQUEST TYPE: POST
-// PARAMETERS: ticker, quantity
-// RETURNS: order object with the correct keys ( created, statusCode, ticker, type, quantity, price)
+// PARAMETERS: ticker, quantity, price, buyOrSell
+// RETURNS: order object with the keys  ticker, quantity, price, buyOrSell
 
-export const buyDummyStock = (ticker, quantity) => {
+export const buyDummyStock = (ticker, quantity, price, buyOrSell) => {
   //find the current price of the chosen stock
-  const dummyStocks = getDummyStocks();
-  const stock = dummyStocks.find((stock) => stock.ticker === ticker);
-  const created = new Date();
+
   const newDummyOrder = {
-    created: created.toISOString(),
-    statusCode: "PENDING",
     ticker: ticker,
-    type: "BUY",
+    type: buyOrSell,
     quantity: quantity,
-    price: stock.price,
+    price: price,
   };
 
   dummyOrders.push(newDummyOrder);
-
   console.log(dummyOrders);
   return newDummyOrder;
 };
